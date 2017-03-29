@@ -5,14 +5,16 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Post;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
+use frontend\controllers\Base;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\web\Response;
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class PostController extends Controller
+class PostController extends Base
 {
     /**
      * @inheritdoc
