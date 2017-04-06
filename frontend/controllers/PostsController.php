@@ -12,19 +12,24 @@ class PostsController extends  ActiveController
     /**
      * @inheritdoc
      */
-    public function behaviors() {
-        return array_merge(parent::behaviors(), [
-            'corsFilter'  => [
-                'class' => Cors::className(),
-                'cors'  => [
-                    'Origin'                           => ['*'],
-                    'Access-Control-Request-Method'    => ['*'],
-                    'Access-Control-Allow-Credentials' => true,
-                    'Access-Control-Max-Age'           => 3600,
-                ],
-            ],
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
 
-        ]);
+        // remove authentication filter
+        $auth = $behaviors['authenticator'];
+        unset($behaviors['authenticator']);
+
+        // add CORS filter
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className(),
+        ];
+
+        // re-add authentication filter
+        $behaviors['authenticator'] = $auth;
+        // avoid authentication on CORS-pre-flight requests (HTTP OPTIONS method)
+        $behaviors['authenticator']['except'] = ['options'];
+
+        return $behaviors;
     }
-
 }

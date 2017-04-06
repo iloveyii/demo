@@ -29,6 +29,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['userId'], 'integer'],
+            [['title', 'body'], 'safe'],
             [['title'], 'string', 'max' => 50],
             [['body'], 'string', 'max' => 200],
         ];

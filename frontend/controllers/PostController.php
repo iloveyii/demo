@@ -65,9 +65,12 @@ class PostController extends Base
      */
     public function actionCreate()
     {
+
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            print_r(Yii::$app->getRequest()->getBodyParams()); die;
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
