@@ -47,4 +47,9 @@ class Post extends \yii\db\ActiveRecord
             'userId' => 'User ID',
         ];
     }
+
+    public static function find()
+    {
+        return parent::find()->orderBy('id DESC');
+    }
 }
