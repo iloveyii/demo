@@ -1,5 +1,6 @@
+Header set Access-Control-Allow-Origin "*"
 RewriteEngine on
-
+RewriteCond %{REQUEST_METHOD} (PUT|POST|GET|DELETE)
 # if a directory or a file exists, use it directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
